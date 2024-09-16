@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "../components/Layout";
 import Login from "../pages/Login";
 import PricingPage from "../pages/Pricing";
+import Register from "../pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
+        path: "register",
+        element: <Register />,
+      },
+      {
         path: "pricing",
         element: <PricingPage />,
       },
@@ -23,7 +28,13 @@ const router = createBrowserRouter([
 ]);
 
 export const App = () => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   return (
     <QueryClientProvider client={queryClient}>
